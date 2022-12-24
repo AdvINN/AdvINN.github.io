@@ -1,0 +1,461 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Imperceptible Adversarial Attack via Invertible Neural Networks</title>
+  <link rel="stylesheet" href="css/bulma.min.css">
+  <link rel="icon" href="assets/images/icon_32x32.png" type="image/png" sizes="32x32">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <meta property="og:type"               content="article" />
+  <meta property="og:title"              content="AdvINN" />
+  <style>
+    .black-frame {
+      height: 100%;
+      background: #171617;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .splide__pagination__page.is-active {
+      background: #555555;
+    }
+
+    .card {
+      margin: 10px;
+    }
+
+    .card .media-content .title,
+    .card .media-content .subtitle {
+      color: #4a4a4a;
+    }
+
+    .subtitle {
+      margin-top: -0.8rem !important;
+    }
+
+    .card-footer {
+      text-align: center;
+    }
+
+    .container{
+      margin-left:auto;
+      margin-right:auto;
+      168px;
+}
+
+    .author {
+      font-size: 1.15rem
+    }
+
+    .author-vistec {
+      font-size: 1.3rem;
+    }
+
+    .conference-name{
+      font-size:  1.5rem;
+      padding: 12px;
+    }
+    @media only screen and (min-width: 900px) {
+      .container.col-max-width {
+        max-width: 900px !important;
+        text-align: center;
+      }      
+    }
+
+    @media only screen and (min-width: 681px) {
+      .vistec-offset {
+        top: -15px;
+      }
+    }
+
+    @media only screen and (max-width: 600px) {
+      .slider-container{
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+      .author {
+        font-size: 0.7rem
+      }
+
+      .author-vistec {
+        font-size: 0.8rem;
+      }
+
+      .conference-name{
+        font-size:  1rem;
+      }
+      .slider-container .card-footer-item{
+        font-size: 14px;
+      }
+    }
+
+    .shead {
+      font-size: 1.7rem;
+      margin-bottom: 0.5em !important;
+    }
+
+    .sec-body {
+      position: relative;
+    }
+
+    .hero-body {
+      padding: 1rem 1rem 2rem 1rem;
+    }
+
+    .bbut {
+      background-color: #739cde;
+      color: white;
+      padding: 0.5em 0.8em;
+      border-radius: 5px;
+    }
+
+    .dtitle {
+      font-size: 1.1rem;
+    }
+
+    .bbut:hover {
+      color: white !important;
+    }
+
+    .videoren .column {
+      margin: 0px;
+    }
+    .button-clipboard-tooltip{
+        display: none;
+        color:white;
+        background: rgba(74,74,74,0.9);
+        border-radius: 2px;
+        padding: 0.5rem 1rem;
+        margin-right: 1rem;
+        text-overflow: ellipsis;
+        white-space: pre;
+    }
+    h1 {
+      font-size: 27px !important;
+    }
+    .conf {
+      font-weight: bold;
+      font-size: 22px !important;
+      color: #4d1e79 !important;
+      margin-top: 12px;
+    }
+    .thanks {
+      margin: 2em 0em -1em 0em;
+      text-align: center;
+    }
+    h2 {
+      font-size: 20px !important;
+      color: #4d1e79 !important;
+      margin-top: 10px;
+    }
+    .author {
+      padding: 0px 10px;
+    }
+    a {
+      text-decoration: none;
+    }
+    .mark {
+      border: 2px #C00000 solid;
+      top: 2px;
+      position: relative;
+    }
+
+    .tablehead {
+      display: inline-block; 
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .imgresult {
+    }
+    .anim {
+      margin-left :10px;
+    }
+    .attable {
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+    h3.am_head {
+      color: #666666;
+      font-size: 26px;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+    #div{
+      width: 810px;
+    }
+    #div1, #div2{
+      width: 400px;
+      display: inline;
+      margin-left:auto;
+      margin-right:auto;
+      168px;
+    }
+
+  .button-7 {
+    background-color: #750d0d;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1;
+    margin: 0;
+    outline: none;
+    padding: 8px .8em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    white-space: nowrap;
+  }
+
+  .button-7:hover,
+  .button-7:focus {
+    background-color: #8a4646;
+  }
+
+  .button-7:focus {
+    box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+  }
+
+  .button-7:active {
+    background-color: #0064bd;
+    box-shadow: none;
+  }
+  .hide {
+    display: none;
+  }
+  #interpolation img, video {
+    max-width: 175px;
+  }
+  #uncond img {
+    display: block;
+      float: left;
+  }
+  .clear {
+    clear: both;
+  }
+  hr {
+      height: 20px;
+  box-shadow: inset 0 20px 20px -20px rgba(0, 0, 0, 0.15);
+  background-color: white;
+  }
+
+  .tablehead2 {
+    padding-top: 15px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    float:left;
+    width: 25%;
+  }
+</style>
+
+
+  </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FHPV7FGRQ7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-FHPV7FGRQ7');
+  </script>
+
+<body style="background-color: white; overflow-x: hidden; font-family: 'Google Sans', sans-serif;">
+  <section class="hero" style="background-color: white;">
+    <div class="hero-body" style="padding: 3rem 0 2rem 0;">
+      <div class="container" style="text-align: center;">
+        <h1 class="title">
+          Imperceptible Adversarial Attack via Invertible Neural Networks
+        </h1>
+        <div class="columns author is-mobile">
+          <div class="column">
+            <span class="author">Zihan Chen</span>
+            <span class="author">Ziyue Wang</span>
+            <span class="author"><a href="https://jjhuangcs.github.io/" style="color: #4a4a4a">Junjie Huang</a></span>
+            <span class="author">Wentao Zhao</span>
+            <span class="author">Xiao Liu</span>
+            <span class="author">Dejian Guan</span>
+          </div>
+        </div>
+        <div>
+        </div>
+        <div class="author-vistec">
+          College of Computer Science, National University of Defense Technology, Changsha, China
+        </div>
+        <h2 class="conf">AAAI 2023</h2>
+      </div>
+    </div>
+  </section>
+  <section class="hero">
+    <div class="container" style="text-align: center">
+      <img src="image/AdvINN_overview.png" style="width: 800px">
+    </div>
+    <div class="container" style="width: 900px">
+      <span style="display: block; font-size: 14px; position: relative; top: -10px; line-height: 1.5em;margin-top: 30px;">
+        <b>Figure 1: The overview architecture of our proposed Adversarial Attack using Invertible Neural Networks (AdvINN) method</b>. The Invertible Information Exchange Module, which is with the information preservation property, non-linearly exchanges information between the input benign image and the target image. The Target Image Learning Module is used to update the learnable target image x<sub>tgt</sub>. The quantization module is set to round the pixel values of the generated adversarial examples x<sub>adv</sub> to be integers and within the range of [0, 255].</span>
+    </div>
+  </section>
+  <section class="hero">
+    <div class="hero-body" style="text-align: center;">
+      <div class="container" style="max-width:900px;">
+        <h1 class="title shead" style="text-align: left;">Abstract</h1>
+        <p class="abstract" style="text-align: justify;line-height: 1.5em;">
+        Adding perturbations via utilizing auxiliary gradient information or discarding existing details of the benign images are two common approaches for generating adversarial examples.
+        Though visual imperceptibility is the desired property of adversarial examples, conventional adversarial attacks still generate traceable adversarial perturbations. 
+        In this paper, we introduce a novel Adversarial Attack via Invertible Neural Networks (AdvINN) method to produce robust and imperceptible adversarial examples. Specifically, AdvINN fully takes advantage of the information preservation property of Invertible Neural Networks and thereby generates adversarial examples by simultaneously adding class-specific semantic information of the target class and dropping discriminant information of the original class. Extensive experiments on CIFAR-10, CIFAR-100, and ImageNet-1K demonstrate that the proposed AdvINN method can produce less imperceptible adversarial images than the state-of-the-art methods and AdvINN yields more robust adversarial examples with high confidence compared to other adversarial attacks.
+        </p>
+      </div>
+    </div>
+  </section>
+  </section>
+  <section class="hero">
+    <div class="container" style="text-align: center">
+      <h1 class="title shead" style="text-align: center;">Results on <span style="color: #750d0d">ImageNet-1K</span></h1>
+      <img src="image/imagenet.png" style="width: 800px">
+    </div>
+    <div class="container" style="width: 800px">
+      <span style="display: block; font-size: 14px; position: relative; top: -10px; line-height: 1.2em;margin-top: 20px;margin-bottom: 22px;">
+        <!-- <b>Figure 2:</b> Exemplar adversarial examples and the corresponding adversarial perturbations generated by C&W, SSAH, PerC-AL, and the proposed AdvINN method on ImageNet-1K. </span> -->
+    </div>
+  </section>
+
+  <section class="hero">
+    <div class="container" id="div" >
+      <h1 class="title shead" style="text-align: center;">Results on <span style="color: #750d0d">CIFAR-10</span> and <span style="color: #750d0d">CIFAR-100</span></h1>
+      <div class="container" style="text-align: center" id="div1">
+        <img src="image/cifar10.png" style="width: 400px">
+      </div>
+      <!-- div class="container" style="width: 400px">
+        <span style="display: block; font-size: 14px; position: relative; top: -10px; line-height: 1.2em;margin-top: 30px;">
+          <b>Figure 2:</b> More adversarial examples crafted by different methods on CIFAR-10. </span>
+      </div> -->
+      <div class="container" style="text-align: center" id="div2">
+        <img src="image/cifar100.png" style="width: 400px">
+      </div>
+      <!-- <div class="container" style="width: 400px">
+        <span style="display: block; font-size: 14px; position: relative; top: -10px; line-height: 1.2em;margin-top: 30px;">
+          <b>Figure 3:</b> More adversarial examples crafted by different methods on CIFAR-100. </span>
+      </div> -->
+  </div>
+  </section>
+
+  <section class="hero">
+      <div class="container" style="width: 600px">
+      <span style="display: block; font-size: 14px; position: relative; top: -10px; line-height: 1.2em; margin-top: 30px; margin-bottom: 50px;">
+        <!-- <b>Figure 3:</b> More adversarial examples crafted by different methods on CIFAR-10 and CIFAR-100. </span> -->
+  </div>
+  </section>
+  
+<section class="hero">
+    <div class="sec-body">
+      <div class="container is-size-5" style="text-align: center; display: flex; justify-content: center; ">
+        <div class="columns" style="width: 450px;">
+          <center><table>
+            <tr>
+              <td>
+                <div>
+                  <a href="#" target="_blank">
+                    <div>
+                      <img src="image/page-1.png" width="110px" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin-bottom: 12px;">
+                    </div>
+                    <center>Paper</center>
+                  </a>
+                </div>
+              </td>
+              <td>
+                <div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+              </td>
+              <td>
+                <a href="https://github.com/jjhuangcs/AdvINN" target="_blank">
+                  <div>
+                    <img src="image/GitHub-Mark-120px-plus.png" width="110px" style="margin-top: 20px; margin-bottom: 20px;">
+                  </div>
+                  <center>Code</center>
+                </a>
+              </td>
+            </tr>
+          </table></center>
+           <!--<div class="column ">
+            <a href="https://www.youtube.com/watch?v=i3rjEsiHoUU" target="_blank">
+              <div>
+                <img src="./images/youtube.png" width="90px" style="margin-top: 30px; margin-bottom: 22px;">
+              </div>
+              Video (5 min.)
+            </a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+<!--   <section class="hero" style="padding-top:0px;">
+    <div class="hero-body">
+      <div class="container" style="max-width:900px;"> -->
+<!-- <div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      BibTex
+    </p>
+    <a class="card-header-icon button-clipboard" style="border:0px; background: inherit;" data-clipboard-target="#bibtex-info" >
+      <div class="button-clipboard-tooltip">Copied!</div>
+      <span class="icon">
+        <img src="images/copy.svg" style="height: 20px;"/>
+      </span>
+    </a>
+  </header>
+  <div class="card-content">
+<pre style="background-color:inherit;padding: 0px;" id="bibtex-info">
+@inproceedings{preechakul2021diffusion,
+      title={Imperceptible Adversarial Attack via Invertible Neural Networks}, 
+      author={Zihan Chen, Ziyue Wang, Jun-Jie Huang, Wentao Zhao, Xiao Liu, and Dejian Guan},
+      booktitle={Thirty-Seventh AAAI Conference on Artificial Intelligence (AAAI)}, 
+      year={2023},
+}
+</pre>
+  </div>
+</div>
+  </section>
+  <hr> -->
+
+  
+  <!-- <script src="scripts/clipboard.min.js"></script> -->
+  <!-- <script> -->
+<!--     var clipboard = new ClipboardJS('.button-clipboard');
+    function setTooltip(){
+      var tooltip = document.querySelector('.button-clipboard-tooltip');
+      tooltip.style.display = 'block';
+    }
+    function hideTooltip(){
+      var tooltip = document.querySelector('.button-clipboard-tooltip');
+      tooltip.style.display = 'none';
+    }
+    clipboard.on('success', function(e) {
+      setTooltip(e.trigger, 'Copied!');
+      setTimeout(function(){
+        hideTooltip(e.trigger);
+      }, 2000);
+      
+    }); -->
+    
+  <!-- </script> -->
+</body>
+
+</html>
